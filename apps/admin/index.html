@@ -1,0 +1,41 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,400;0,500;0,600;0,700;0,800;1,400&family=Sora:wght@600;700;800&display=swap"
+      rel="stylesheet"
+    />
+    <title>RWash – The Art of Detailing at Your Doorstep | Admin</title>
+    <script>
+      // Paint cached DB theme instantly (before React) to avoid any flash of unstyled content.
+      (function () {
+        try {
+          var raw = localStorage.getItem('rwash_theme_config');
+          if (!raw) return;
+          var cfg = JSON.parse(raw);
+          if (!cfg || !cfg.light || !cfg.dark) return;
+          var L = cfg.light, D = cfg.dark, r = document.documentElement;
+          var set = function (k, v) { if (v) r.style.setProperty(k, v); };
+          set('--theme-p', L.primary); set('--theme-bg', L.bg); set('--theme-card', L.card);
+          set('--theme-border', L.border); set('--theme-text', L.textPrimary); set('--theme-text2', L.textSecondary);
+          set('--theme-accent', L.accent); set('--theme-btn', L.btn);
+          set('--theme-header-bg', L.headerBg || L.card); set('--theme-sidebar-bg', L.sidebarBg || L.bg);
+          set('--theme-dp', D.primary); set('--theme-dbg', D.bg); set('--theme-dcard', D.card);
+          set('--theme-dborder', D.border); set('--theme-dtext', D.textPrimary); set('--theme-dtext2', D.textSecondary);
+          set('--theme-daccent', D.accent); set('--theme-dbtn', D.btn);
+          set('--theme-dheader-bg', D.headerBg || D.card); set('--theme-dsidebar-bg', D.sidebarBg || D.bg);
+          r.style.backgroundColor = r.classList.contains('dark') ? D.bg : L.bg;
+        } catch (e) {}
+      })();
+    </script>
+  </head>
+  <body>
+    <div id="root"></div>
+    <script type="module" src="/src/main.tsx"></script>
+  </body>
+</html>

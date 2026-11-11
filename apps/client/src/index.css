@@ -1,0 +1,324 @@
+@import "tailwindcss";
+@config "../tailwind.config.js";
+@custom-variant dark (&:where(.dark, .dark *));
+
+:root {
+  --bg-light: var(--theme-bg, #F8FAFC);
+  --card-light: var(--theme-card, #FFFFFF);
+  --border-light: var(--theme-border, #E2E8F0);
+  --text-light-primary: var(--theme-text, #0F172A);
+  --text-light-secondary: var(--theme-text2, #475569);
+  --accent-light: var(--theme-accent, #2563EB);
+  --btn-light: var(--theme-btn, #1D4ED8);
+
+  --bg-dark: var(--theme-dbg, #0A0F1D);
+  --card-dark: var(--theme-dcard, #131B2E);
+  --border-dark: var(--theme-dborder, #1E293B);
+  --text-dark-primary: var(--theme-dtext, #F8FAFC);
+  --text-dark-secondary: var(--theme-dtext2, #94A3B8);
+  --accent-dark: var(--theme-daccent, #38BDF8);
+  --btn-dark: var(--theme-dbtn, #2563EB);
+
+  --primary-50: #FFF8F0;
+  --primary-100: #FDF0E6;
+  --primary-200: #F5D9C4;
+  --primary-300: #E6B998;
+  --primary-400: #D49B70;
+  --primary-405: #C28052;
+  --primary-500: #A65D2E;
+  --primary-600: #8C471E;
+  --primary-655: #733615;
+  --primary-700: #5C270C;
+  --primary-750: #471C06;
+  --primary-755: #381403;
+  --primary-800: #2E1002;
+  --primary-900: #210E04;
+  --primary-950: #120702;
+
+  --color-primary-50: #FFF8F0;
+  --color-primary-100: #FDF0E6;
+  --color-primary-200: #F5D9C4;
+  --color-primary-300: #E6B998;
+  --color-primary-400: #D49B70;
+  --color-primary-405: #C28052;
+  --color-primary-500: #A65D2E;
+  --color-primary-600: #8C471E;
+  --color-primary-655: #733615;
+  --color-primary-700: #5C270C;
+  --color-primary-750: #471C06;
+  --color-primary-755: #381403;
+  --color-primary-800: #2E1002;
+  --color-primary-900: #210E04;
+  --color-primary-950: #120702;
+}
+
+@theme {
+  --color-primary-50: #FFF8F0;
+  --color-primary-100: #FDF0E6;
+  --color-primary-200: #F5D9C4;
+  --color-primary-300: #E6B998;
+  --color-primary-400: #D49B70;
+  --color-primary-405: #C28052;
+  --color-primary-500: #A65D2E;
+  --color-primary-600: #8C471E;
+  --color-primary-655: #733615;
+  --color-primary-700: #5C270C;
+  --color-primary-750: #471C06;
+  --color-primary-755: #381403;
+  --color-primary-800: #2E1002;
+  --color-primary-900: #210E04;
+  --color-primary-950: #120702;
+
+  /* Overrides to completely remove oklch slate-900 (#0f172a) in favor of warm brown palette */
+  --color-slate-950: #120702;
+  --color-slate-900: #210E04;
+  --color-slate-855: #2E1002;
+  --color-slate-800: #381403;
+  --color-stone-950: #120702;
+  --color-stone-900: #210E04;
+  --color-[#000000]: #120702;
+}
+
+html {
+  scroll-behavior: smooth;
+  background-color: var(--theme-bg, var(--bg-light, #FFF8F0));
+  color: var(--theme-text, var(--text-light-primary, #3D1E0B));
+}
+
+html.dark,
+html.dark body,
+html.dark #root {
+  background-color: var(--theme-dbg, var(--bg-dark, #120702)) !important;
+  color: var(--theme-dtext, var(--text-dark-primary, #FFF5EB)) !important;
+}
+
+body {
+  background-color: var(--theme-bg, var(--bg-light, #FFF8F0));
+  color: var(--theme-text, var(--text-light-primary, #3D1E0B));
+  font-family: 'Plus Jakarta Sans', 'Inter', system-ui, sans-serif;
+  min-height: 100vh;
+  transition: background-color 0.25s ease, color 0.25s ease;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+/* ── Global typography scale: headings display font, body readable ── */
+h1, h2, .font-display {
+  font-family: 'Sora', 'Plus Jakarta Sans', 'Inter', sans-serif;
+  letter-spacing: -0.02em;
+}
+h1 { line-height: 1.12; }
+h2 { line-height: 1.2; }
+h3, h4 { letter-spacing: -0.01em; line-height: 1.3; }
+p { line-height: 1.6; }
+label { letter-spacing: 0.04em; }
+button { letter-spacing: 0.02em; }
+input, textarea, select { font-family: inherit; }
+
+/* Up & Down Vertical Wave Bobbing Keyframes (Top to Bottom Wave Undulation) */
+@keyframes waveVerticalBob {
+  0%, 100% {
+    transform: translateY(0px) scaleY(1);
+  }
+  50% {
+    transform: translateY(14px) scaleY(1.12);
+  }
+}
+
+@keyframes waveVerticalBobRev {
+  0%, 100% {
+    transform: translateY(0px) scaleY(1.08);
+  }
+  50% {
+    transform: translateY(-12px) scaleY(0.92);
+  }
+}
+
+.animate-wave-bob {
+  animation: waveVerticalBob 4.5s ease-in-out infinite !important;
+  will-change: transform;
+}
+
+.animate-wave-bob-slow {
+  animation: waveVerticalBobRev 7s ease-in-out infinite !important;
+  will-change: transform;
+}
+
+/* Animations */
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes slideUp {
+  from { transform: translateY(16px); opacity: 0; }
+  to { transform: translateY(0); opacity: 1; }
+}
+
+@keyframes slideDown {
+  from { transform: translateY(-16px); opacity: 0; }
+  to { transform: translateY(0); opacity: 1; }
+}
+
+@keyframes circleExpand {
+  0% {
+    clip-path: circle(0% at 90% 40px);
+    opacity: 0.7;
+  }
+  50% {
+    opacity: 1;
+  }
+  100% {
+    clip-path: circle(160% at 90% 40px);
+    opacity: 1;
+  }
+}
+
+@keyframes pulseGlow {
+  0%, 100% { transform: scale(1); opacity: 0.9; }
+  50% { transform: scale(1.18); opacity: 1; }
+}
+
+.animate-circle-expand {
+  animation: circleExpand 0.6s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+.animate-pulse-glow {
+  animation: pulseGlow 0.6s ease-in-out infinite;
+}
+
+.animate-fade-in {
+  animation: fadeIn 0.3s ease-out forwards;
+}
+
+.animate-slide-up {
+  animation: slideUp 0.3s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+.animate-slide-down {
+  animation: slideDown 0.3s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+/* Custom Scroll Reveal */
+.reveal-on-scroll {
+  opacity: 0;
+  transform: translateY(30px);
+  transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+}
+
+.reveal-on-scroll.revealed {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Smooth Horizontal Slide Animations for Auth Split Screen */
+@keyframes slideInFromLeft {
+  0% {
+    opacity: 0;
+    transform: translateX(-70px) scale(0.96);
+  }
+  100% {
+    opacity: 1;
+    transform: translateX(0) scale(1);
+  }
+}
+
+@keyframes slideInFromRight {
+  0% {
+    opacity: 0;
+    transform: translateX(70px) scale(0.96);
+  }
+  100% {
+    opacity: 1;
+    transform: translateX(0) scale(1);
+  }
+}
+
+.animate-slide-left-smooth {
+  animation: slideInFromLeft 0.55s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+.animate-slide-right-smooth {
+  animation: slideInFromRight 0.55s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+/* Full Hero Banner Slide-in Animations */
+@keyframes bannerSlideInFromRight {
+  0% {
+    transform: translateX(100%);
+    opacity: 0;
+  }
+  100% {
+    transform: translateX(0);
+    opacity: 1;
+  }
+}
+
+@keyframes bannerSlideInFromLeft {
+  0% {
+    transform: translateX(-100%);
+    opacity: 0;
+  }
+  100% {
+    transform: translateX(0);
+    opacity: 1;
+  }
+}
+
+.animate-banner-slide-right {
+  animation: bannerSlideInFromRight 0.75s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+.animate-banner-slide-left {
+  animation: bannerSlideInFromLeft 0.75s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+@keyframes logoFloat {
+  0%, 100% {
+    transform: translateY(0) scale(1);
+  }
+  50% {
+    transform: translateY(-6px) scale(1.04);
+  }
+}
+
+.animate-logo-float {
+  animation: logoFloat 3.5s ease-in-out infinite;
+}
+
+/* Force readable white text on hero banner slides regardless of theme */
+.hero-slider h2,
+.hero-slider p,
+.hero-slider span {
+  color: #ffffff;
+}
+
+/* Loading Skeleton Shimmer */
+@keyframes shimmerAnim {
+  0% { transform: translateX(-100%); }
+  100% { transform: translateX(100%); }
+}
+
+.animate-shimmer {
+  position: relative;
+  overflow: hidden;
+}
+
+.animate-shimmer::after {
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  transform: translateX(-100%);
+  background-image: linear-gradient(
+    90deg,
+    rgba(255, 255, 255, 0) 0,
+    rgba(255, 255, 255, 0.08) 30%,
+    rgba(255, 255, 255, 0.22) 50%,
+    rgba(255, 255, 255, 0.08) 70%,
+    rgba(255, 255, 255, 0) 100%
+  );
+  animation: shimmerAnim 1.8s infinite;
+  content: '';
+}

@@ -1,0 +1,18 @@
+{
+  "name": "rwash",
+  "version": "1.0.0",
+  "private": true,
+  "workspaces": [
+    "apps/*"
+  ],
+  "scripts": {
+    "dev:admin": "npm run dev --prefix apps/admin",
+    "dev:client": "npm run dev --prefix apps/client",
+    "build:admin": "npm run build --prefix apps/admin",
+    "build:client": "npm run build --prefix apps/client",
+    "test:client": "npm run test --prefix apps/client",
+    "test:admin": "npm run test --prefix apps/admin",
+    "test": "npm run test:client && npm run test:admin"
+  }
+}
+
