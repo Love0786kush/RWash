@@ -8,11 +8,26 @@ export interface Customer {
   email?: string | null
   phone?: string | null
   avatar_url?: string | null
+  address?: string | null
+  city?: string | null
   status: 'Active' | 'Inactive' | 'Suspended'
   total_bookings: number
   total_spent: number
   loyalty_points: number
   created_at: string
+}
+
+export interface Profile {
+  id: string
+  full_name: string
+  email?: string | null
+  phone_number?: string | null
+  avatar_url?: string | null
+  address?: string | null
+  city?: string | null
+  role: 'Admin' | 'Customer' | 'Worker'
+  created_at?: string
+  updated_at?: string
 }
 
 export interface ServiceCategory {

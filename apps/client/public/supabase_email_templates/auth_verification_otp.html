@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Your Verification Code - RWash</title>
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      background-color: #FFF8F0;
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+      color: #3D1E0B;
+    }
+    .wrapper {
+      width: 100%;
+      background-color: #FFF8F0;
+      padding: 40px 16px;
+    }
+    .card {
+      max-width: 500px;
+      margin: 0 auto;
+      background: #FFFFFF;
+      border-radius: 24px;
+      border: 1px solid #E6CBB2;
+      padding: 40px 32px;
+      box-shadow: 0 4px 20px rgba(61, 30, 11, 0.06);
+    }
+    .logo-container {
+      text-align: center;
+      margin-bottom: 28px;
+    }
+    .logo-icon {
+      display: inline-block;
+      width: 52px;
+      height: 52px;
+      background: #8C471E;
+      border-radius: 16px;
+      line-height: 52px;
+      color: #ffffff;
+      font-size: 26px;
+      font-weight: 900;
+    }
+    .brand-title {
+      margin-top: 12px;
+      font-size: 22px;
+      font-weight: 800;
+      color: #3D1E0B;
+      letter-spacing: -0.5px;
+    }
+    .brand-subtitle {
+      font-size: 11px;
+      font-weight: 800;
+      color: #8C471E;
+      text-transform: uppercase;
+      letter-spacing: 2px;
+      margin-top: 2px;
+    }
+    .heading {
+      font-size: 20px;
+      font-weight: 700;
+      color: #3D1E0B;
+      text-align: center;
+      margin: 24px 0 8px 0;
+    }
+    .subtext {
+      font-size: 14px;
+      color: #7A5635;
+      text-align: center;
+      line-height: 1.5;
+      margin: 0 0 28px 0;
+    }
+    .otp-box {
+      background: #FFF3E6;
+      border: 2px dashed #8C471E;
+      border-radius: 16px;
+      padding: 22px;
+      text-align: center;
+      margin-bottom: 24px;
+    }
+    .otp-code {
+      font-size: 36px;
+      font-weight: 900;
+      letter-spacing: 8px;
+      color: #8C471E;
+      margin: 0;
+      font-family: 'Courier New', Courier, monospace;
+    }
+    .otp-expiry {
+      font-size: 12px;
+      color: #7A5635;
+      margin-top: 8px;
+      font-weight: 500;
+    }
+    .security-note {
+      font-size: 12px;
+      color: #9C7D64;
+      line-height: 1.6;
+      text-align: center;
+      border-top: 1px solid #F0DFCE;
+      padding-top: 20px;
+      margin-top: 24px;
+    }
+    .footer {
+      text-align: center;
+      margin-top: 24px;
+      font-size: 11px;
+      color: #B8977D;
+    }
+  </style>
+</head>
+<body>
+  <div class="wrapper">
+    <div class="card">
+      <div class="logo-container">
+        <div class="logo-icon">🚗</div>
+        <div class="brand-title">RWash</div>
+        <div class="brand-subtitle">Doorstep Detailing Redefined</div>
+      </div>
+
+      <h1 class="heading">Verify Your Account</h1>
+      <p class="subtext">
+        Use the 6-digit verification code below to complete your registration or login to your RWash account:
+      </p>
+
+      <div class="otp-box">
+        <p class="otp-code">{{ .Token }}</p>
+        <p class="otp-expiry">⏱️ Valid for 10 minutes</p>
+      </div>
+
+      <div class="security-note">
+        <strong>Security Tip:</strong> Never share this verification code with anyone. RWash team members will never ask for your code or password.
+      </div>
+    </div>
+
+    <div class="footer">
+      <p>© {{ .Year }} RWash Auto Care Technologies Pvt Ltd. All rights reserved.</p>
+      <p>Need help? Contact support directly from the app or website.</p>
+    </div>
+  </div>
+</body>
+</html>
+

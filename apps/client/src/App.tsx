@@ -23,6 +23,7 @@ import { TermsConditions } from './pages/TermsConditions'
 // Client Auth & Dashboard Pages
 import { ClientLogin } from './pages/ClientLogin'
 import { ClientSignup } from './pages/ClientSignup'
+import { ClientSetupProfile } from './pages/ClientSetupProfile'
 import { ResetPassword } from './pages/ResetPassword'
 import { ClientDashboard } from './pages/ClientDashboard'
 import { ClientBookings } from './pages/ClientBookings'
@@ -49,7 +50,7 @@ const PublicLayout: React.FC<LayoutProps> = ({ children }) => {
 }
 
 const ClientLayout: React.FC<LayoutProps> = ({ children }) => {
-  const { user, customer, logout, loading } = useClientAuth()
+  const { user, customer, isProfileComplete, logout, loading } = useClientAuth()
   const [sidebarOpen, setSidebarOpen] = useState(false)
 
   if (loading) {
@@ -57,7 +58,11 @@ const ClientLayout: React.FC<LayoutProps> = ({ children }) => {
   }
 
   if (!user) {
-    return <Navigate to="/" replace />
+    return <Navigate to="/login" replace />
+  }
+
+  if (!isProfileComplete) {
+    return <Navigate to="/setup-profile" replace />
   }
 
   if (customer && customer.status === 'Suspended') {
@@ -99,7 +104,7 @@ import { supabase } from './supabaseClient'
 import { applyTheme } from './utils/themeHelper'
 
 const AppContent: React.FC = () => {
-  const { user, loading } = useClientAuth()
+  const { user, isProfileComplete, loading } = useClientAuth()
   const navigate = useNavigate()
   const location = useLocation()
   const [showSplash, setShowSplash] = useState(true)
@@ -108,14 +113,18 @@ const AppContent: React.FC = () => {
     return localStorage.getItem('theme') === 'dark'
   })
 
-  // Auto-redirect confirmed authenticated user to /dashboard if on public/landing route
+  // Auto-redirect authenticated user based on database verification
   useEffect(() => {
-    if (user && user.email_confirmed_at) {
-      if (location.pathname === '/' || location.pathname === '/login' || location.pathname === '/signup' || window.location.hash.includes('access_token')) {
-        navigate('/dashboard', { replace: true })
+    if (user) {
+      if (location.pathname === '/login' || location.pathname === '/signup' || window.location.hash.includes('access_token')) {
+        if (!isProfileComplete) {
+          navigate('/setup-profile', { replace: true })
+        } else {
+          navigate('/dashboard', { replace: true })
+        }
       }
     }
-  }, [user, location.pathname, navigate])
+  }, [user, isProfileComplete, location.pathname, navigate])
 
   useEffect(() => {
     // Ensure initial theme defaults match localStorage
@@ -308,12 +317,34 @@ const AppContent: React.FC = () => {
 
       {/* Customer Auth Gates */}
       <Route
+        path="/setup-profile"
+        element={
+          user ? (
+            isProfileComplete ? <Navigate to="/dashboard" replace /> : <ClientSetupProfile />
+          ) : (
+            <Navigate to="/login" replace />
+          )
+        }
+      />
+      <Route
         path="/login"
-        element={user ? <Navigate to="/dashboard" replace /> : <ClientLogin />}
+        element={
+          user ? (
+            !isProfileComplete ? <Navigate to="/setup-profile" replace /> : <Navigate to="/dashboard" replace />
+          ) : (
+            <ClientLogin />
+          )
+        }
       />
       <Route
         path="/signup"
-        element={<Navigate to="/login" replace />}
+        element={
+          user ? (
+            !isProfileComplete ? <Navigate to="/setup-profile" replace /> : <Navigate to="/dashboard" replace />
+          ) : (
+            <ClientLogin />
+          )
+        }
       />
       <Route
         path="/reset-password"
